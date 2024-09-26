@@ -66,7 +66,7 @@ namespace WindowsFormsApp1.form
             this.panel8 = new System.Windows.Forms.Panel();
             this.btn_viewcategory = new System.Windows.Forms.Button();
             this.btn_editcategory = new System.Windows.Forms.Button();
-            this.btn_deletecategory = new System.Windows.Forms.Button();
+            this.btn_blockcategory = new System.Windows.Forms.Button();
             this.btn_addcategory = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
             this.txt_namecategory = new System.Windows.Forms.TextBox();
@@ -394,6 +394,7 @@ namespace WindowsFormsApp1.form
             // 
             // txt_findfood
             // 
+            this.txt_findfood.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_findfood.Location = new System.Drawing.Point(56, 17);
             this.txt_findfood.Multiline = true;
             this.txt_findfood.Name = "txt_findfood";
@@ -402,12 +403,14 @@ namespace WindowsFormsApp1.form
             // 
             // btn_findfood
             // 
+            this.btn_findfood.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_findfood.Location = new System.Drawing.Point(278, 3);
             this.btn_findfood.Name = "btn_findfood";
             this.btn_findfood.Size = new System.Drawing.Size(130, 69);
             this.btn_findfood.TabIndex = 4;
             this.btn_findfood.Text = "Tìm kiếm";
             this.btn_findfood.UseVisualStyleBackColor = true;
+            this.btn_findfood.Click += new System.EventHandler(this.btn_findfood_Click);
             // 
             // panel4
             // 
@@ -440,6 +443,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_viewfood
             // 
+            this.btn_viewfood.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_viewfood.Location = new System.Drawing.Point(421, 3);
             this.btn_viewfood.Name = "btn_viewfood";
             this.btn_viewfood.Size = new System.Drawing.Size(130, 69);
@@ -450,6 +454,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_editfood
             // 
+            this.btn_editfood.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editfood.Location = new System.Drawing.Point(285, 3);
             this.btn_editfood.Name = "btn_editfood";
             this.btn_editfood.Size = new System.Drawing.Size(130, 69);
@@ -460,6 +465,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_blockfood
             // 
+            this.btn_blockfood.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_blockfood.Location = new System.Drawing.Point(149, 3);
             this.btn_blockfood.Name = "btn_blockfood";
             this.btn_blockfood.Size = new System.Drawing.Size(130, 69);
@@ -470,6 +476,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_addfood
             // 
+            this.btn_addfood.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addfood.Location = new System.Drawing.Point(13, 3);
             this.btn_addfood.Name = "btn_addfood";
             this.btn_addfood.Size = new System.Drawing.Size(130, 69);
@@ -495,7 +502,7 @@ namespace WindowsFormsApp1.form
             // 
             this.panel8.Controls.Add(this.btn_viewcategory);
             this.panel8.Controls.Add(this.btn_editcategory);
-            this.panel8.Controls.Add(this.btn_deletecategory);
+            this.panel8.Controls.Add(this.btn_blockcategory);
             this.panel8.Controls.Add(this.btn_addcategory);
             this.panel8.Location = new System.Drawing.Point(6, 6);
             this.panel8.Name = "panel8";
@@ -504,15 +511,18 @@ namespace WindowsFormsApp1.form
             // 
             // btn_viewcategory
             // 
+            this.btn_viewcategory.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_viewcategory.Location = new System.Drawing.Point(421, 3);
             this.btn_viewcategory.Name = "btn_viewcategory";
             this.btn_viewcategory.Size = new System.Drawing.Size(130, 69);
             this.btn_viewcategory.TabIndex = 3;
             this.btn_viewcategory.Text = "Xem";
             this.btn_viewcategory.UseVisualStyleBackColor = true;
+            this.btn_viewcategory.Click += new System.EventHandler(this.btn_viewcategory_Click);
             // 
             // btn_editcategory
             // 
+            this.btn_editcategory.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editcategory.Location = new System.Drawing.Point(285, 3);
             this.btn_editcategory.Name = "btn_editcategory";
             this.btn_editcategory.Size = new System.Drawing.Size(130, 69);
@@ -520,17 +530,19 @@ namespace WindowsFormsApp1.form
             this.btn_editcategory.Text = "Sửa";
             this.btn_editcategory.UseVisualStyleBackColor = true;
             // 
-            // btn_deletecategory
+            // btn_blockcategory
             // 
-            this.btn_deletecategory.Location = new System.Drawing.Point(149, 3);
-            this.btn_deletecategory.Name = "btn_deletecategory";
-            this.btn_deletecategory.Size = new System.Drawing.Size(130, 69);
-            this.btn_deletecategory.TabIndex = 1;
-            this.btn_deletecategory.Text = "Xoá";
-            this.btn_deletecategory.UseVisualStyleBackColor = true;
+            this.btn_blockcategory.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_blockcategory.Location = new System.Drawing.Point(149, 3);
+            this.btn_blockcategory.Name = "btn_blockcategory";
+            this.btn_blockcategory.Size = new System.Drawing.Size(130, 69);
+            this.btn_blockcategory.TabIndex = 1;
+            this.btn_blockcategory.Text = "Khoá";
+            this.btn_blockcategory.UseVisualStyleBackColor = true;
             // 
             // btn_addcategory
             // 
+            this.btn_addcategory.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addcategory.Location = new System.Drawing.Point(13, 3);
             this.btn_addcategory.Name = "btn_addcategory";
             this.btn_addcategory.Size = new System.Drawing.Size(130, 69);
@@ -551,7 +563,7 @@ namespace WindowsFormsApp1.form
             // 
             // txt_namecategory
             // 
-            this.txt_namecategory.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_namecategory.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_namecategory.Location = new System.Drawing.Point(174, 86);
             this.txt_namecategory.Multiline = true;
             this.txt_namecategory.Name = "txt_namecategory";
@@ -571,12 +583,12 @@ namespace WindowsFormsApp1.form
             // 
             // txt_idcategory
             // 
-            this.txt_idcategory.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_idcategory.Location = new System.Drawing.Point(145, 11);
+            this.txt_idcategory.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_idcategory.Location = new System.Drawing.Point(174, 11);
             this.txt_idcategory.Multiline = true;
             this.txt_idcategory.Name = "txt_idcategory";
             this.txt_idcategory.ReadOnly = true;
-            this.txt_idcategory.Size = new System.Drawing.Size(263, 46);
+            this.txt_idcategory.Size = new System.Drawing.Size(234, 46);
             this.txt_idcategory.TabIndex = 6;
             // 
             // label9
@@ -606,6 +618,7 @@ namespace WindowsFormsApp1.form
             this.dtgvcategory.RowTemplate.Height = 28;
             this.dtgvcategory.Size = new System.Drawing.Size(566, 511);
             this.dtgvcategory.TabIndex = 0;
+            this.dtgvcategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvcategory_CellClick);
             // 
             // tabPage4
             // 
@@ -633,6 +646,7 @@ namespace WindowsFormsApp1.form
             // 
             // btnviewtable
             // 
+            this.btnviewtable.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnviewtable.Location = new System.Drawing.Point(421, 3);
             this.btnviewtable.Name = "btnviewtable";
             this.btnviewtable.Size = new System.Drawing.Size(130, 69);
@@ -642,6 +656,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_edittable
             // 
+            this.btn_edittable.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_edittable.Location = new System.Drawing.Point(285, 3);
             this.btn_edittable.Name = "btn_edittable";
             this.btn_edittable.Size = new System.Drawing.Size(130, 69);
@@ -651,6 +666,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_deletetable
             // 
+            this.btn_deletetable.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_deletetable.Location = new System.Drawing.Point(149, 3);
             this.btn_deletetable.Name = "btn_deletetable";
             this.btn_deletetable.Size = new System.Drawing.Size(130, 69);
@@ -660,6 +676,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_addtable
             // 
+            this.btn_addtable.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addtable.Location = new System.Drawing.Point(13, 3);
             this.btn_addtable.Name = "btn_addtable";
             this.btn_addtable.Size = new System.Drawing.Size(130, 69);
@@ -784,6 +801,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_viewemployee
             // 
+            this.btn_viewemployee.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_viewemployee.Location = new System.Drawing.Point(421, 3);
             this.btn_viewemployee.Name = "btn_viewemployee";
             this.btn_viewemployee.Size = new System.Drawing.Size(130, 69);
@@ -793,6 +811,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_editemployee
             // 
+            this.btn_editemployee.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_editemployee.Location = new System.Drawing.Point(285, 3);
             this.btn_editemployee.Name = "btn_editemployee";
             this.btn_editemployee.Size = new System.Drawing.Size(130, 69);
@@ -802,6 +821,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_banemployee
             // 
+            this.btn_banemployee.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_banemployee.Location = new System.Drawing.Point(149, 3);
             this.btn_banemployee.Name = "btn_banemployee";
             this.btn_banemployee.Size = new System.Drawing.Size(130, 69);
@@ -811,6 +831,7 @@ namespace WindowsFormsApp1.form
             // 
             // btn_addemployee
             // 
+            this.btn_addemployee.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addemployee.Location = new System.Drawing.Point(13, 3);
             this.btn_addemployee.Name = "btn_addemployee";
             this.btn_addemployee.Size = new System.Drawing.Size(130, 69);
@@ -1050,7 +1071,7 @@ namespace WindowsFormsApp1.form
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button btn_viewcategory;
         private System.Windows.Forms.Button btn_editcategory;
-        private System.Windows.Forms.Button btn_deletecategory;
+        private System.Windows.Forms.Button btn_blockcategory;
         private System.Windows.Forms.Button btn_addcategory;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.TextBox txt_namecategory;

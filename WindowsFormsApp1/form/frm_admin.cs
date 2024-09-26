@@ -23,6 +23,8 @@ namespace WindowsFormsApp1.form
             this.FormClosed += new FormClosedEventHandler(this.frm_admin_FormClosed);
         }
 
+        //Page danh mục
+
         private frm_main mainForm;
 
         private void frm_admin_FormClosed(object sender, FormClosedEventArgs e)
@@ -74,7 +76,11 @@ namespace WindowsFormsApp1.form
         {
             this.categoryTableAdapter.Fill(this.quanLyBanCafeDataSet2.Category);
             GetDataFood();
+            GetDataCategory();
+            GetDataTable();
         }
+
+        //Page đồ uống
 
         List<Food> foods = new List<Food>();
 
@@ -83,6 +89,11 @@ namespace WindowsFormsApp1.form
             string query = "select f.* from Food f";
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
+            AddDataFoods(data);
+        }
+
+        private void AddDataFoods(DataTable data)
+        {
             dtgvfood.Columns.Clear();
             foods.Clear();
 
@@ -174,13 +185,20 @@ namespace WindowsFormsApp1.form
             nb_giafood.Value = 10000;
             cb_category.SelectedValue = 0;
             btn_blockfood.Enabled = true;
+            GetDataFood();
             food = new Food();
+            txt_idcategory.Clear();
+            txt_namecategory.Clear();
+            GetDataCategory();
+            category = new Category();
         }
 
         private void ReloadPage()
         {
             ClearFoodDetails();
             GetDataFood();
+            GetDataCategory();
+            GetDataTable();
         }
 
         private void btn_editfood_Click(object sender, EventArgs e)
@@ -306,6 +324,134 @@ namespace WindowsFormsApp1.form
             {
                 MessageBox.Show("Thất bại");
                 ReloadPage();
+            }
+        }
+
+        private void btn_findfood_Click(object sender, EventArgs e)
+        {
+            string keyfood = txt_findfood.Text;
+            string query = "SELECT * FROM Food WHERE Name LIKE '%' + @FoodName + '%'";
+
+            DataTable data = DataProvider.Instance.ExcuteQuery(query, new object[] { keyfood });
+
+            AddDataFoods(data);
+        }
+
+
+        //Page danh mục
+
+        List<Category> categories = new List<Category>();
+
+        private void GetDataCategory()
+        {
+            string query = "exec GetDataCategory";
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            AddDataCategorys(data);
+        }
+
+        private void AddDataCategorys(DataTable data)
+        {
+            dtgvcategory.Columns.Clear();
+            categories.Clear();
+
+            dtgvcategory.Columns.Add("CategoryId", "Category ID");
+            dtgvcategory.Columns.Add("Name", "Tên");
+            dtgvcategory.Columns.Add("IsBlock", "Is Block");
+
+            foreach (DataRow row in data.Rows)
+            {
+                Category category = new Category(row);
+
+                categories.Add(category);
+            }
+
+            foreach (var item in categories)
+            {
+                int index = dtgvcategory.Rows.Add();
+                dtgvcategory.Rows[index].Cells["CategoryId"].Value = item.Id;
+                dtgvcategory.Rows[index].Cells["Name"].Value = item.Name;
+                dtgvcategory.Rows[index].Cells["IsBlock"].Value = item.IsBlock;
+            }
+        }
+
+        Category category = new Category();
+
+        private void btn_viewcategory_Click(object sender, EventArgs e)
+        {
+            if (category != null)
+            {
+                txt_idcategory.Text = category.Id.ToString();
+                txt_namecategory.Text = category.Name;
+
+                if (category.IsBlock == 1)
+                {
+                    btn_blockcategory.Text = "Mở khoá";
+                    btn_blockcategory.Tag = 1;
+                }
+                else
+                {
+                    btn_blockcategory.Text = "Khoá";
+                    btn_blockcategory.Tag = 0;
+                }
+            }
+        }
+
+        private void dtgvcategory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dtgvcategory.Rows[e.RowIndex];
+
+                string categoryid = row.Cells["CategoryId"].Value.ToString();
+                string name = row.Cells["Name"].Value.ToString();
+                string isBlock = row.Cells["isBlock"].Value.ToString();
+
+                category = new Category
+                {
+                    Id = int.Parse(categoryid),
+                    Name = name,
+                    IsBlock = int.Parse(isBlock)
+                };
+            }
+        }
+
+        //Page bàn ăn
+
+        List<Table> tables = new List<Table>();
+
+        private void GetDataTable()
+        {
+            string query = "select tf.* from TableFood tf";
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            AddDataTables(data);
+        }
+
+        private void AddDataTables(DataTable data)
+        {
+            dtgvtable.Columns.Clear();
+            tables.Clear();
+
+            dtgvtable.Columns.Add("TableId", "Table ID");
+            dtgvtable.Columns.Add("Name", "Tên");
+            dtgvtable.Columns.Add("Status", "Trạng thái");
+            dtgvtable.Columns.Add("IsBlock", "Is Block");
+
+            foreach (DataRow row in data.Rows)
+            {
+                Table table = new Table(row);
+
+                tables.Add(table);
+            }
+
+            foreach (var item in tables)
+            {
+                int index = dtgvtable.Rows.Add();
+                dtgvtable.Rows[index].Cells["TableId"].Value = item.Id;
+                dtgvtable.Rows[index].Cells["Name"].Value = item.Name;
+                dtgvtable.Rows[index].Cells["Status"].Value = item.Status;
+                dtgvtable.Rows[index].Cells["IsBlock"].Value = item.IsBlock;
             }
         }
     }

@@ -7,24 +7,22 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.entity
 {
-    class Table
+    class Category
     {
-        int id, status;
+        int id;
         string name;
         int isBlock;
 
-        public Table() { }
+        public Category() { }
 
-        public Table(DataRow row)
+        public Category(DataRow row)
         {
             this.Id = int.Parse(row["id"].ToString());
             this.Name = row["name"].ToString();
-            this.Status = int.Parse(row["status"].ToString());
             this.IsBlock = int.Parse(row["isBlock"].ToString());
         }
 
         public int Id { get => id; set => id = value; }
-        public int Status { get => status; set => status = value; }
         public string Name { get => name; set => name = value; }
         public int IsBlock { get => isBlock; set => isBlock = value; }
     }

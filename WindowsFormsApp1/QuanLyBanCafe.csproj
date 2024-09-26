@@ -50,6 +50,7 @@
     <Compile Include="entity\Bill.cs" />
     <Compile Include="entity\BillByTable.cs" />
     <Compile Include="entity\BillItem.cs" />
+    <Compile Include="entity\Category.cs" />
     <Compile Include="entity\Food.cs" />
     <Compile Include="entity\Table.cs" />
     <Compile Include="form\frm_admin.cs">
