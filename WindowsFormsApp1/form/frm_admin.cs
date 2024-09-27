@@ -78,11 +78,21 @@ namespace WindowsFormsApp1.form
             GetDataFood();
             GetDataCategory();
             GetDataTable();
+            GetDataAccount();
+        }
+
+        private void ClearPageStatistical()
+        {
+            dtgvBill.Columns.Clear();
+            dtfromdate.Value = DateTime.Now;
+            dttodate.Value = DateTime.Now;
         }
 
         //Page đồ uống
 
         List<Food> foods = new List<Food>();
+        Food food = new Food();
+        bool isViewFoodClick = false;
 
         private void GetDataFood()
         {
@@ -123,10 +133,11 @@ namespace WindowsFormsApp1.form
             }
         }
 
-        Food food = new Food();
-
         private void dtgvfood_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!isViewFoodClick)
+                return;
+
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dtgvfood.Rows[e.RowIndex];
@@ -146,11 +157,14 @@ namespace WindowsFormsApp1.form
                     IsBlock = int.Parse(isBlock)
                 };
             }
-        }
 
+            isViewFoodClick = false;
+        }
 
         private void btn_viewfood_Click(object sender, EventArgs e)
         {
+            isViewFoodClick = true;
+
             if (food != null)
             {
                 txt_idfood.Text = food.Id.ToString();
@@ -173,32 +187,18 @@ namespace WindowsFormsApp1.form
 
         private void tcAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ClearFoodDetails();
-        }
-
-        private void ClearFoodDetails()
-        {
-            dtgvBill.Columns.Clear();
-            txt_findfood.Clear();
-            txt_idfood.Clear();
-            txt_namefood.Clear();
-            nb_giafood.Value = 10000;
-            cb_category.SelectedValue = 0;
-            btn_blockfood.Enabled = true;
-            GetDataFood();
-            food = new Food();
-            txt_idcategory.Clear();
-            txt_namecategory.Clear();
-            GetDataCategory();
-            category = new Category();
+            ReloadPage();
         }
 
         private void ReloadPage()
         {
-            ClearFoodDetails();
-            GetDataFood();
-            GetDataCategory();
-            GetDataTable();
+            ClearPageStatistical();
+
+            ClearPageCategory();
+
+            ClearPageTable();
+
+            ClearPageAccount();
         }
 
         private void btn_editfood_Click(object sender, EventArgs e)
@@ -222,12 +222,12 @@ namespace WindowsFormsApp1.form
                 if (result > 0)
                 {
                     MessageBox.Show("Cập nhật thành công");
-                    ReloadPage();
+                    ClearPageFood();
                 }
                 else
                 {
                     MessageBox.Show("Cập nhật thất bại");
-                    ReloadPage();
+                    ClearPageFood();
                 }
             }
             catch (SqlException ex)
@@ -273,12 +273,12 @@ namespace WindowsFormsApp1.form
                 if (result > 0)
                 {
                     MessageBox.Show($"Thêm thành công");
-                    ReloadPage();
+                    ClearPageFood();
                 }
                 else
                 {
                     MessageBox.Show("Thêm thất bại");
-                    ReloadPage();
+                    ClearPageFood();
                 }
             }
             catch (SqlException ex)
@@ -313,17 +313,17 @@ namespace WindowsFormsApp1.form
             if (result > 0 && isBlock == 1)
             {
                 MessageBox.Show($"Khoá thành công");
-                ReloadPage();
+                ClearPageFood();
             }
             else if (result > 0 && isBlock == 0)
             {
                 MessageBox.Show("Mở khoá thành công");
-                ReloadPage();
+                ClearPageFood();
             }
             else
             {
                 MessageBox.Show("Thất bại");
-                ReloadPage();
+                ClearPageFood();
             }
         }
 
@@ -337,10 +337,22 @@ namespace WindowsFormsApp1.form
             AddDataFoods(data);
         }
 
+        private void ClearPageFood()
+        {
+            txt_findfood.Clear();
+            txt_idfood.Clear();
+            txt_namefood.Clear();
+            nb_giafood.Value = 10000;
+            cb_category.SelectedValue = 0;
+            food = new Food();
+            GetDataFood();
+        }
 
         //Page danh mục
 
         List<Category> categories = new List<Category>();
+        Category category = new Category();
+        bool isViewCategoryClick = false;
 
         private void GetDataCategory()
         {
@@ -359,6 +371,8 @@ namespace WindowsFormsApp1.form
             dtgvcategory.Columns.Add("Name", "Tên");
             dtgvcategory.Columns.Add("IsBlock", "Is Block");
 
+            dtgvcategory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             foreach (DataRow row in data.Rows)
             {
                 Category category = new Category(row);
@@ -375,10 +389,11 @@ namespace WindowsFormsApp1.form
             }
         }
 
-        Category category = new Category();
 
         private void btn_viewcategory_Click(object sender, EventArgs e)
         {
+            isViewCategoryClick = true;
+
             if (category != null)
             {
                 txt_idcategory.Text = category.Id.ToString();
@@ -399,6 +414,9 @@ namespace WindowsFormsApp1.form
 
         private void dtgvcategory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!isViewCategoryClick)
+                return;
+
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dtgvcategory.Rows[e.RowIndex];
@@ -414,11 +432,23 @@ namespace WindowsFormsApp1.form
                     IsBlock = int.Parse(isBlock)
                 };
             }
+
+            isViewCategoryClick = false;
+        }
+
+        private void ClearPageCategory()
+        {
+            txt_idcategory.Clear();
+            txt_namecategory.Clear();
+            GetDataCategory();
+            category = new Category();
         }
 
         //Page bàn ăn
 
         List<Table> tables = new List<Table>();
+        Table table = new Table();
+        bool isViewTableClick = false;
 
         private void GetDataTable()
         {
@@ -438,6 +468,8 @@ namespace WindowsFormsApp1.form
             dtgvtable.Columns.Add("Status", "Trạng thái");
             dtgvtable.Columns.Add("IsBlock", "Is Block");
 
+            dtgvtable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             foreach (DataRow row in data.Rows)
             {
                 Table table = new Table(row);
@@ -452,6 +484,454 @@ namespace WindowsFormsApp1.form
                 dtgvtable.Rows[index].Cells["Name"].Value = item.Name;
                 dtgvtable.Rows[index].Cells["Status"].Value = item.Status;
                 dtgvtable.Rows[index].Cells["IsBlock"].Value = item.IsBlock;
+            }
+        }
+
+        private void dtgvtable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!isViewTableClick)
+                return;
+
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dtgvtable.Rows[e.RowIndex];
+
+                string tableid = row.Cells["TableId"].Value.ToString();
+                string name = row.Cells["Name"].Value.ToString();
+                string status = row.Cells["Status"].Value.ToString();
+                string isBlock = row.Cells["isBlock"].Value.ToString();
+
+                table = new Table
+                {
+                    Id = int.Parse(tableid),
+                    Name = name,
+                    Status = int.Parse(status),
+                    IsBlock = int.Parse(isBlock)
+                };
+            }
+
+            isViewTableClick = false;
+        }
+
+        private void btnviewtable_Click(object sender, EventArgs e)
+        {
+            isViewTableClick = true;
+
+            if (table != null)
+            {
+                txt_idtable.Text = table.Id.ToString();
+                txt_nametable.Text = table.Name;
+                txt_statustable.Text = table.Status == 0 ? "Trống" : "Bận";
+
+                if (table.IsBlock == 1)
+                {
+                    btn_blocktable.Text = "Mở khoá";
+                    btn_blocktable.Tag = 1;
+                }
+                else
+                {
+                    btn_blocktable.Text = "Khoá";
+                    btn_blocktable.Tag = 0;
+                }
+            }
+        }
+
+        private void btn_edittable_Click(object sender, EventArgs e)
+        {
+            if (table.Id == 0 || table == null)
+            {
+                MessageBox.Show("Vui lòng chọn bàn trước và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "UPDATE TableFood SET name = @Name WHERE id = @TableID and status = 0";
+            string name = txt_nametable.Text;
+
+            try
+            {
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { name, table.Id });
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    ClearPageTable();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại, đang có khách ngồi bàn này");
+                    ClearPageTable();
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("Tên bàn đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btn_addtable_Click(object sender, EventArgs e)
+        {
+            string nameTable = txt_nametable.Text;
+
+            if (string.IsNullOrWhiteSpace(nameTable))
+            {
+                MessageBox.Show("Vui lòng nhập tên bàn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "exec InsertTable @NameTable";
+
+            try
+            {
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { nameTable });
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Thêm thành công");
+                    ClearPageTable();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm thất bại");
+                    ClearPageTable();
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("Tên bàn đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btn_blocktable_Click(object sender, EventArgs e)
+        {
+            if (table.Id == 0 || table == null)
+            {
+                MessageBox.Show("Vui lòng chọn bàn trước và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "UPDATE TableFood SET isBlock = @IsBlock WHERE id = @TableID and status = 0";
+            int isBlock = Convert.ToInt32(btn_blocktable.Tag);
+            isBlock = (isBlock == 0) ? 1 : 0;
+
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { isBlock, table.Id });
+
+            if (result > 0 && isBlock == 1)
+            {
+                MessageBox.Show($"Khoá thành công");
+                ClearPageTable();
+            }
+            else if (result > 0 && isBlock == 0)
+            {
+                MessageBox.Show("Mở khoá thành công");
+                ClearPageTable();
+            }
+            else
+            {
+                MessageBox.Show("Thất bại, vì đang có khách ngồi bàn này");
+                ClearPageTable();
+            }
+        }
+
+        private void ClearPageTable()
+        {
+            txt_idtable.Clear();
+            txt_nametable.Clear();
+            txt_statustable.Clear();
+            table = new Table();
+            GetDataTable();
+        }
+
+        //Page tài khoản
+        List<Account> accounts = new List<Account>();
+        Account account = new Account();
+        bool isViewAccountClick = false;
+
+        private void GetDataAccount()
+        {
+            string query = "select acc.id, acc.fullname, acc.username, acc.role, acc.isBlock from Account acc";
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            AddDataAccounts(data);
+        }
+
+        private void AddDataAccounts(DataTable data)
+        {
+            dtgvemployee.Columns.Clear();
+            accounts.Clear();
+
+            dtgvemployee.Columns.Add("AccountId", "Account ID");
+            dtgvemployee.Columns.Add("Fullname", "Họ tên");
+            dtgvemployee.Columns.Add("Username", "Username");
+            dtgvemployee.Columns.Add("Role", "Quyền");
+            dtgvemployee.Columns.Add("IsBlock", "Is Block");
+
+            dtgvemployee.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            foreach (DataRow row in data.Rows)
+            {
+                Account account = new Account(row);
+
+                accounts.Add(account);
+            }
+
+            foreach (var item in accounts)
+            {
+                int index = dtgvemployee.Rows.Add();
+                dtgvemployee.Rows[index].Cells["AccountId"].Value = item.Id;
+                dtgvemployee.Rows[index].Cells["Fullname"].Value = item.Fullname;
+                dtgvemployee.Rows[index].Cells["Username"].Value = item.Username;
+                dtgvemployee.Rows[index].Cells["Role"].Value = item.Role;
+                dtgvemployee.Rows[index].Cells["IsBlock"].Value = item.IsBlock;
+            }
+        }
+
+        private void dtgvemployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!isViewAccountClick)
+                return;
+
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dtgvemployee.Rows[e.RowIndex];
+
+                string accountid = row.Cells["AccountId"].Value.ToString();
+                string fullname = row.Cells["Fullname"].Value.ToString();
+                string username = row.Cells["Username"].Value.ToString();
+                string role = row.Cells["Role"].Value.ToString();
+                string isBlock = row.Cells["isBlock"].Value.ToString();
+
+                account = new Account
+                {
+                    Id = int.Parse(accountid),
+                    Fullname = fullname,
+                    Username = username,
+                    Role = role,
+                    IsBlock = int.Parse(isBlock)
+                };
+            }
+
+            isViewAccountClick = false;
+        }
+
+        private void btn_viewemployee_Click(object sender, EventArgs e)
+        {
+            isViewAccountClick = true;
+
+            if (account != null)
+            {
+                txt_username.Text = account.Username;
+                txt_fullname.Text = account.Fullname;
+
+                if (account.Role == "ADMIN")
+                {
+                    rd_roleadmin.Checked = true;
+                }
+                else
+                {
+                    rd_roleuser.Checked = true;
+                }
+
+                if (account.IsBlock == 0)
+                {
+                    rd_action.Checked = true;
+                }
+                else
+                {
+                    rd_block.Checked = true;
+                }
+
+                if (account.IsBlock == 1)
+                {
+                    btn_blockemployee.Text = "Mở khoá";
+                    btn_blockemployee.Tag = 1;
+                }
+                else
+                {
+                    btn_blockemployee.Text = "Khoá";
+                    btn_blockemployee.Tag = 0;
+                }
+            }
+        }
+
+        private void btn_editemployee_Click(object sender, EventArgs e)
+        {
+            if (account.Id == 0 || account == null)
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "update Account set username = @Username, fullname = @Fullname, role = @Role where id = @AccountId";
+            string username = txt_username.Text;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Vui lòng nhập tên đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string fullname = txt_fullname.Text;
+            if (string.IsNullOrWhiteSpace(fullname))
+            {
+                MessageBox.Show("Vui lòng nhập họ và tên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string role = rd_roleadmin.Checked ? "ADMIN" : "USER";
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                MessageBox.Show("Vui lòng chọn quyền", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { username, fullname, role, account.Id });
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    ClearPageAccount();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại");
+                    ClearPageAccount();
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("Username đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ClearPageAccount()
+        {
+            txt_username.Clear();
+            txt_password.Clear();
+            txt_fullname.Clear();
+            rd_action.Checked = false;
+            rd_block.Checked = false;
+            rd_roleadmin.Checked = false;
+            rd_roleuser.Checked = false;
+            account = new Account();
+            GetDataAccount();
+        }
+
+        private void btn_cleartoaddempl_Click(object sender, EventArgs e)
+        {
+            ClearPageAccount();
+            txt_password.Enabled = true;
+        }
+
+        private void btn_addemployee_Click(object sender, EventArgs e)
+        {
+            string username = txt_username.Text;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Vui lòng nhập tên đăng nhập", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string fullname = txt_fullname.Text;
+            if (string.IsNullOrWhiteSpace(fullname))
+            {
+                MessageBox.Show("Vui lòng nhập họ và tên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string password = txt_password.Text;
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string role = rd_roleadmin.Checked ? "ADMIN" : "USER";
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                MessageBox.Show("Vui lòng chọn quyền", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "exec InsertAccount @Fullname, @Username, @Password , @Role";
+
+            try
+            {
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { fullname, username, password, role });
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Thêm nhân viên thành công");
+                    ClearPageAccount();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm nhân viên thất bại");
+                    ClearPageAccount();
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("Username đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btn_blockemployee_Click(object sender, EventArgs e)
+        {
+            if (account.Id == 0 || account == null)
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "update Account set isBlock = @IsBlock WHERE id = @AccountId";
+            int isBlock = Convert.ToInt32(btn_blockemployee.Tag);
+            isBlock = (isBlock == 0) ? 1 : 0;
+
+            int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { isBlock, account.Id });
+
+            if (result > 0 && isBlock == 1)
+            {
+                MessageBox.Show($"Khoá thành công");
+                ClearPageAccount();
+            }
+            else if (result > 0 && isBlock == 0)
+            {
+                MessageBox.Show("Mở khoá thành công");
+                ClearPageAccount();
+            }
+            else
+            {
+                MessageBox.Show("Thất bại");
+                ClearPageAccount();
             }
         }
     }

@@ -70,24 +70,39 @@ namespace WindowsFormsApp1
 
         private void cb_category_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int categoryId = int.Parse(cb_category.SelectedValue.ToString());
-
-            string query = "exec GetDataFoodByCategoryId @id";
-            DataTable data = DataProvider.Instance.ExcuteQuery(query, new object[] { categoryId });
-
-            List<Food> foods = new List<Food>();
-
-            foreach (DataRow row in data.Rows)
+            // Kiểm tra nếu SelectedValue không null
+            if (cb_category.SelectedValue != null)
             {
-                Food food = new Food(row);
+                int categoryId;
+                // Kiểm tra nếu SelectedValue có thể được chuyển đổi thành int
+                if (int.TryParse(cb_category.SelectedValue.ToString(), out categoryId))
+                {
+                    string query = "exec GetDataFoodByCategoryId @id";
+                    DataTable data = DataProvider.Instance.ExcuteQuery(query, new object[] { categoryId });
 
-                foods.Add(food);
+                    List<Food> foods = new List<Food>();
+
+                    foreach (DataRow row in data.Rows)
+                    {
+                        Food food = new Food(row);
+                        foods.Add(food);
+                    }
+
+                    cb_food.DataSource = foods;
+                    cb_food.DisplayMember = "Name";
+                    cb_food.ValueMember = "Id";
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi chuyển đổi categoryId", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-
-            cb_food.DataSource = foods;
-            cb_food.DisplayMember = "Name";
-            cb_food.ValueMember = "Id";
+            else
+            {
+                MessageBox.Show("Vui lòng chọn danh mục hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
 
         List<Table> tables = new List<Table>();
 
