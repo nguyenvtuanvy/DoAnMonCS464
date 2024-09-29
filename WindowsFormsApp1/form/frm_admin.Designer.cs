@@ -91,6 +91,7 @@ namespace WindowsFormsApp1.form
             this.txt_idtable = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.btn_cleartoaddempl = new System.Windows.Forms.Button();
             this.panel13 = new System.Windows.Forms.Panel();
             this.btn_viewemployee = new System.Windows.Forms.Button();
             this.btn_editemployee = new System.Windows.Forms.Button();
@@ -99,9 +100,15 @@ namespace WindowsFormsApp1.form
             this.panel14 = new System.Windows.Forms.Panel();
             this.dtgvemployee = new System.Windows.Forms.DataGridView();
             this.panel15 = new System.Windows.Forms.Panel();
-            this.btn_resetpass = new System.Windows.Forms.Button();
-            this.rd_block = new System.Windows.Forms.RadioButton();
+            this.txt_password = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel17 = new System.Windows.Forms.Panel();
             this.rd_action = new System.Windows.Forms.RadioButton();
+            this.rd_block = new System.Windows.Forms.RadioButton();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.rd_roleuser = new System.Windows.Forms.RadioButton();
+            this.rd_roleadmin = new System.Windows.Forms.RadioButton();
+            this.btn_resetpass = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txt_fullname = new System.Windows.Forms.TextBox();
@@ -109,13 +116,6 @@ namespace WindowsFormsApp1.form
             this.txt_username = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.categoryTableAdapter = new WindowsFormsApp1.QuanLyBanCafeDataSet2TableAdapters.CategoryTableAdapter();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.rd_roleadmin = new System.Windows.Forms.RadioButton();
-            this.rd_roleuser = new System.Windows.Forms.RadioButton();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.btn_cleartoaddempl = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -145,8 +145,8 @@ namespace WindowsFormsApp1.form
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvemployee)).BeginInit();
             this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
+            this.panel16.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcAdmin
@@ -537,6 +537,7 @@ namespace WindowsFormsApp1.form
             this.btn_editcategory.TabIndex = 2;
             this.btn_editcategory.Text = "Sửa";
             this.btn_editcategory.UseVisualStyleBackColor = true;
+            this.btn_editcategory.Click += new System.EventHandler(this.btn_editcategory_Click);
             // 
             // btn_blockcategory
             // 
@@ -547,6 +548,7 @@ namespace WindowsFormsApp1.form
             this.btn_blockcategory.TabIndex = 1;
             this.btn_blockcategory.Text = "Khoá";
             this.btn_blockcategory.UseVisualStyleBackColor = true;
+            this.btn_blockcategory.Click += new System.EventHandler(this.btn_blockcategory_Click);
             // 
             // btn_addcategory
             // 
@@ -557,6 +559,7 @@ namespace WindowsFormsApp1.form
             this.btn_addcategory.TabIndex = 0;
             this.btn_addcategory.Text = "Thêm";
             this.btn_addcategory.UseVisualStyleBackColor = true;
+            this.btn_addcategory.Click += new System.EventHandler(this.btn_addcategory_Click);
             // 
             // panel9
             // 
@@ -803,6 +806,17 @@ namespace WindowsFormsApp1.form
             this.tabPage5.Text = "Tài khoản";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // btn_cleartoaddempl
+            // 
+            this.btn_cleartoaddempl.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cleartoaddempl.Location = new System.Drawing.Point(875, 9);
+            this.btn_cleartoaddempl.Name = "btn_cleartoaddempl";
+            this.btn_cleartoaddempl.Size = new System.Drawing.Size(111, 69);
+            this.btn_cleartoaddempl.TabIndex = 14;
+            this.btn_cleartoaddempl.Text = "Thêm nhân viên mới";
+            this.btn_cleartoaddempl.UseVisualStyleBackColor = true;
+            this.btn_cleartoaddempl.Click += new System.EventHandler(this.btn_cleartoaddempl_Click);
+            // 
             // panel13
             // 
             this.panel13.Controls.Add(this.btn_viewemployee);
@@ -895,15 +909,49 @@ namespace WindowsFormsApp1.form
             this.panel15.Size = new System.Drawing.Size(420, 517);
             this.panel15.TabIndex = 13;
             // 
-            // btn_resetpass
+            // txt_password
             // 
-            this.btn_resetpass.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_resetpass.Location = new System.Drawing.Point(278, 445);
-            this.btn_resetpass.Name = "btn_resetpass";
-            this.btn_resetpass.Size = new System.Drawing.Size(130, 69);
-            this.btn_resetpass.TabIndex = 14;
-            this.btn_resetpass.Text = "Đặt lại mật khẩu";
-            this.btn_resetpass.UseVisualStyleBackColor = true;
+            this.txt_password.Enabled = false;
+            this.txt_password.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_password.Location = new System.Drawing.Point(190, 164);
+            this.txt_password.Multiline = true;
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Size = new System.Drawing.Size(218, 46);
+            this.txt_password.TabIndex = 18;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(66, 184);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(120, 26);
+            this.label16.TabIndex = 17;
+            this.label16.Text = "Mật khẩu:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel17
+            // 
+            this.panel17.Controls.Add(this.rd_action);
+            this.panel17.Controls.Add(this.rd_block);
+            this.panel17.Location = new System.Drawing.Point(190, 345);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(218, 89);
+            this.panel17.TabIndex = 16;
+            // 
+            // rd_action
+            // 
+            this.rd_action.AutoSize = true;
+            this.rd_action.Enabled = false;
+            this.rd_action.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rd_action.ForeColor = System.Drawing.Color.Lime;
+            this.rd_action.Location = new System.Drawing.Point(4, 6);
+            this.rd_action.Name = "rd_action";
+            this.rd_action.Size = new System.Drawing.Size(116, 26);
+            this.rd_action.TabIndex = 12;
+            this.rd_action.TabStop = true;
+            this.rd_action.Text = "Hoạt động";
+            this.rd_action.UseVisualStyleBackColor = true;
             // 
             // rd_block
             // 
@@ -919,19 +967,47 @@ namespace WindowsFormsApp1.form
             this.rd_block.Text = "Cấm";
             this.rd_block.UseVisualStyleBackColor = true;
             // 
-            // rd_action
+            // panel16
             // 
-            this.rd_action.AutoSize = true;
-            this.rd_action.Enabled = false;
-            this.rd_action.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rd_action.ForeColor = System.Drawing.Color.Lime;
-            this.rd_action.Location = new System.Drawing.Point(4, 6);
-            this.rd_action.Name = "rd_action";
-            this.rd_action.Size = new System.Drawing.Size(116, 26);
-            this.rd_action.TabIndex = 12;
-            this.rd_action.TabStop = true;
-            this.rd_action.Text = "Hoạt động";
-            this.rd_action.UseVisualStyleBackColor = true;
+            this.panel16.Controls.Add(this.rd_roleuser);
+            this.panel16.Controls.Add(this.rd_roleadmin);
+            this.panel16.Location = new System.Drawing.Point(190, 238);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(218, 100);
+            this.panel16.TabIndex = 15;
+            // 
+            // rd_roleuser
+            // 
+            this.rd_roleuser.AutoSize = true;
+            this.rd_roleuser.Location = new System.Drawing.Point(4, 56);
+            this.rd_roleuser.Name = "rd_roleuser";
+            this.rd_roleuser.Size = new System.Drawing.Size(80, 24);
+            this.rd_roleuser.TabIndex = 1;
+            this.rd_roleuser.TabStop = true;
+            this.rd_roleuser.Text = "USER";
+            this.rd_roleuser.UseVisualStyleBackColor = true;
+            // 
+            // rd_roleadmin
+            // 
+            this.rd_roleadmin.AutoSize = true;
+            this.rd_roleadmin.Location = new System.Drawing.Point(3, 15);
+            this.rd_roleadmin.Name = "rd_roleadmin";
+            this.rd_roleadmin.Size = new System.Drawing.Size(86, 24);
+            this.rd_roleadmin.TabIndex = 0;
+            this.rd_roleadmin.TabStop = true;
+            this.rd_roleadmin.Text = "ADMIN";
+            this.rd_roleadmin.UseVisualStyleBackColor = true;
+            // 
+            // btn_resetpass
+            // 
+            this.btn_resetpass.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_resetpass.Location = new System.Drawing.Point(278, 445);
+            this.btn_resetpass.Name = "btn_resetpass";
+            this.btn_resetpass.Size = new System.Drawing.Size(130, 69);
+            this.btn_resetpass.TabIndex = 14;
+            this.btn_resetpass.Text = "Đặt lại mật khẩu";
+            this.btn_resetpass.UseVisualStyleBackColor = true;
+            this.btn_resetpass.Click += new System.EventHandler(this.btn_resetpass_Click);
             // 
             // label15
             // 
@@ -998,78 +1074,6 @@ namespace WindowsFormsApp1.form
             // 
             this.categoryTableAdapter.ClearBeforeFill = true;
             // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.rd_roleuser);
-            this.panel16.Controls.Add(this.rd_roleadmin);
-            this.panel16.Location = new System.Drawing.Point(190, 238);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(218, 100);
-            this.panel16.TabIndex = 15;
-            // 
-            // rd_roleadmin
-            // 
-            this.rd_roleadmin.AutoSize = true;
-            this.rd_roleadmin.Location = new System.Drawing.Point(3, 15);
-            this.rd_roleadmin.Name = "rd_roleadmin";
-            this.rd_roleadmin.Size = new System.Drawing.Size(86, 24);
-            this.rd_roleadmin.TabIndex = 0;
-            this.rd_roleadmin.TabStop = true;
-            this.rd_roleadmin.Text = "ADMIN";
-            this.rd_roleadmin.UseVisualStyleBackColor = true;
-            // 
-            // rd_roleuser
-            // 
-            this.rd_roleuser.AutoSize = true;
-            this.rd_roleuser.Location = new System.Drawing.Point(4, 56);
-            this.rd_roleuser.Name = "rd_roleuser";
-            this.rd_roleuser.Size = new System.Drawing.Size(80, 24);
-            this.rd_roleuser.TabIndex = 1;
-            this.rd_roleuser.TabStop = true;
-            this.rd_roleuser.Text = "USER";
-            this.rd_roleuser.UseVisualStyleBackColor = true;
-            // 
-            // panel17
-            // 
-            this.panel17.Controls.Add(this.rd_action);
-            this.panel17.Controls.Add(this.rd_block);
-            this.panel17.Location = new System.Drawing.Point(190, 345);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(218, 89);
-            this.panel17.TabIndex = 16;
-            // 
-            // txt_password
-            // 
-            this.txt_password.Enabled = false;
-            this.txt_password.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_password.Location = new System.Drawing.Point(190, 164);
-            this.txt_password.Multiline = true;
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(218, 46);
-            this.txt_password.TabIndex = 18;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(66, 184);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(120, 26);
-            this.label16.TabIndex = 17;
-            this.label16.Text = "Mật khẩu:";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btn_cleartoaddempl
-            // 
-            this.btn_cleartoaddempl.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cleartoaddempl.Location = new System.Drawing.Point(875, 9);
-            this.btn_cleartoaddempl.Name = "btn_cleartoaddempl";
-            this.btn_cleartoaddempl.Size = new System.Drawing.Size(111, 69);
-            this.btn_cleartoaddempl.TabIndex = 14;
-            this.btn_cleartoaddempl.Text = "Thêm nhân viên mới";
-            this.btn_cleartoaddempl.UseVisualStyleBackColor = true;
-            this.btn_cleartoaddempl.Click += new System.EventHandler(this.btn_cleartoaddempl_Click);
-            // 
             // frm_admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1114,10 +1118,10 @@ namespace WindowsFormsApp1.form
             ((System.ComponentModel.ISupportInitialize)(this.dtgvemployee)).EndInit();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
             this.ResumeLayout(false);
 
         }

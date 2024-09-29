@@ -12,3 +12,4 @@ D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm
 D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frm_main.resources
 D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm_admin.resources
 D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm_BillPay.resources
+D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm_reset_password.resources

@@ -15,28 +15,25 @@ namespace WindowsFormsApp1.form
 {
     public partial class frm_admin : Form
     {
-        public frm_admin()
+        private frm_main mainForm;
+        public frm_admin(frm_main mainForm)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.dtgvfood.CellClick += new DataGridViewCellEventHandler(this.dtgvfood_CellClick);
             this.FormClosed += new FormClosedEventHandler(this.frm_admin_FormClosed);
+
+            this.mainForm = mainForm;
         }
 
         //Page danh mục
-
-        private frm_main mainForm;
-
         private void frm_admin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (mainForm == null || mainForm.IsDisposed)
+            if (mainForm != null && !mainForm.IsDisposed)
             {
-                mainForm = new frm_main();
-                mainForm.Show();
-            }
-            else
-            {
-                mainForm.BringToFront();
+                mainForm.RefreshMainForm();  // Gọi phương thức để refresh dữ liệu
+                mainForm.Show();  // Hiển thị lại form main
+                mainForm.BringToFront();  // Đưa form main lên trước
             }
         }
 
@@ -194,6 +191,8 @@ namespace WindowsFormsApp1.form
         {
             ClearPageStatistical();
 
+            ClearPageFood();
+
             ClearPageCategory();
 
             ClearPageTable();
@@ -212,8 +211,20 @@ namespace WindowsFormsApp1.form
 
             string query = "exec UpdateFood @FoodID, @Name, @CategoryID, @Price";
             int categoryID = (int)selectedValue;
+
             string namefood = txt_namefood.Text;
+            if (string.IsNullOrWhiteSpace(namefood))
+            {
+                MessageBox.Show("Vui lòng nhập tên món", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             float pricefood = (float)nb_giafood.Value;
+            if (string.IsNullOrWhiteSpace(pricefood.ToString()))
+            {
+                MessageBox.Show("Vui lòng nhập giá đồ uống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
@@ -243,7 +254,6 @@ namespace WindowsFormsApp1.form
             }
         }
 
-
         private void btn_addfood_Click(object sender, EventArgs e)
         {
             string namefood = txt_namefood.Text;
@@ -263,6 +273,11 @@ namespace WindowsFormsApp1.form
 
             int categoryID = (int)selectedValue;
             float pricefood = (float)nb_giafood.Value;
+            if (string.IsNullOrWhiteSpace(pricefood.ToString()))
+            {
+                MessageBox.Show("Vui lòng nhập giá đồ uống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             string query = "exec InsertFood @Name, @Price, @CategoryId";
             try
@@ -303,16 +318,19 @@ namespace WindowsFormsApp1.form
                 return;
             }
 
-            string query = "update Food set isBlock = @IsBlock where id = @FoodId";
             int isBlock = Convert.ToInt32(btn_blockfood.Tag);
-
             isBlock = (isBlock == 0) ? 1 : 0;
+
+            string query = "UPDATE Food " +
+                "SET isBlock = @IsBlock " +
+                "WHERE id = @FoodId AND " +
+                "EXISTS(SELECT 1 FROM Category WHERE Category.id = Food.category_id AND Category.isBlock = 0)";
 
             int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { isBlock, food.Id });
 
             if (result > 0 && isBlock == 1)
             {
-                MessageBox.Show($"Khoá thành công");
+                MessageBox.Show("Khoá thành công");
                 ClearPageFood();
             }
             else if (result > 0 && isBlock == 0)
@@ -322,7 +340,7 @@ namespace WindowsFormsApp1.form
             }
             else
             {
-                MessageBox.Show("Thất bại");
+                MessageBox.Show("Thất bại. Danh mục của món này đang bị khoá, không thể mở khoá món.");
                 ClearPageFood();
             }
         }
@@ -342,6 +360,7 @@ namespace WindowsFormsApp1.form
             txt_findfood.Clear();
             txt_idfood.Clear();
             txt_namefood.Clear();
+            btn_blockfood.Text = "Khoá";
             nb_giafood.Value = 10000;
             cb_category.SelectedValue = 0;
             food = new Food();
@@ -389,7 +408,6 @@ namespace WindowsFormsApp1.form
             }
         }
 
-
         private void btn_viewcategory_Click(object sender, EventArgs e)
         {
             isViewCategoryClick = true;
@@ -436,10 +454,134 @@ namespace WindowsFormsApp1.form
             isViewCategoryClick = false;
         }
 
+        private void btn_editcategory_Click(object sender, EventArgs e)
+        {
+            if (category.Id == 0 || category == null)
+            {
+                MessageBox.Show("Vui lòng chọn danh mục và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string name = txt_namecategory.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Vui lòng nhập tên danh mục", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "update Category set name = @NameCategory where id = @CategoryId";
+
+            try
+            {
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { name, category.Id });
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    ClearPageCategory();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại");
+                    ClearPageCategory();
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("Tên danh mục đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btn_addcategory_Click(object sender, EventArgs e)
+        {
+            string name = txt_namecategory.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Vui lòng nhập tên danh mục", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "exec InsertCategory @NameCategory";
+
+            try
+            {
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { name });
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Thêm thành công");
+                    ClearPageCategory();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm thất bại");
+                    ClearPageCategory();
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    MessageBox.Show("Tên danh mục đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"SQL Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btn_blockcategory_Click(object sender, EventArgs e)
+        {
+            if (category.Id == 0 || category == null)
+            {
+                MessageBox.Show("Vui lòng chọn danh mục và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //string query = "exec UpdateBlockCategoryById @CategoryID, @IsBlock";
+            int isBlock = Convert.ToInt32(btn_blockcategory.Tag);
+            isBlock = (isBlock == 0) ? 1 : 0;
+
+            string action = isBlock == 1 ? "khoá" : "mở khoá";
+            string message = $"Bạn có chắc chắn muốn {action} danh mục và các món trong danh mục không?";
+
+            DialogResult result = MessageBox.Show(message, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                ExecuteCategoryBlockAction(category.Id, isBlock);
+            }
+        }
+
+        private void ExecuteCategoryBlockAction(int categoryId, int isBlock)
+        {
+            string query = "exec UpdateBlockCategoryById @CategoryID, @IsBlock";
+            int affectedRows = DataProvider.Instance.ExcuteNonQuery(query, new object[] { categoryId, isBlock });
+            string action = isBlock == 1 ? "Khoá" : "Mở khoá";
+
+            if (affectedRows > 0)
+            {
+                MessageBox.Show($"{action} thành công");
+                ClearPageCategory();
+            }
+            else
+            {
+                MessageBox.Show($"{action} thất bại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ClearPageCategory()
         {
             txt_idcategory.Clear();
             txt_namecategory.Clear();
+            btn_blockcategory.Text = "Khoá";
             GetDataCategory();
             category = new Category();
         }
@@ -545,7 +687,13 @@ namespace WindowsFormsApp1.form
             }
 
             string query = "UPDATE TableFood SET name = @Name WHERE id = @TableID and status = 0";
+
             string name = txt_nametable.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Vui lòng nhập tên bàn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
@@ -651,6 +799,7 @@ namespace WindowsFormsApp1.form
             txt_idtable.Clear();
             txt_nametable.Clear();
             txt_statustable.Clear();
+            btn_blocktable.Text = "Khoá";
             table = new Table();
             GetDataTable();
         }
@@ -834,6 +983,7 @@ namespace WindowsFormsApp1.form
             rd_block.Checked = false;
             rd_roleadmin.Checked = false;
             rd_roleuser.Checked = false;
+            btn_blockemployee.Text = "Khoá";
             account = new Account();
             GetDataAccount();
         }
@@ -933,6 +1083,18 @@ namespace WindowsFormsApp1.form
                 MessageBox.Show("Thất bại");
                 ClearPageAccount();
             }
+        }
+
+        private void btn_resetpass_Click(object sender, EventArgs e)
+        {
+            if (account.Id == 0 || account == null)
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản và nhấn xem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            frm_reset_password _Reset_Password = new frm_reset_password(account.Fullname, account);
+            _Reset_Password.Show();
         }
     }
 }

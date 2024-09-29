@@ -21,18 +21,14 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            LoadDataTable();
-        }
 
-        public frm_main(Account account)
-        {
-            InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            acc_login = account;
+            acc_login = Session.Instance.CurrentAccount;
+
             if (acc_login.Role != "ADMIN")
             {
                 adminToolStripMenuItem.Visible = false;
             }
+
             LoadDataTable();
         }
 
@@ -44,15 +40,18 @@ namespace WindowsFormsApp1
 
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Session.Instance.ClearSession();
             index_form.frm_Login.Show();
+            this.Hide();
         }
+
         private frm_admin adminForm;
+
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (adminForm == null || adminForm.IsDisposed)
             {
-                adminForm = new frm_admin();
+                adminForm = new frm_admin(this);
                 adminForm.Show();
             }
             else
@@ -61,48 +60,77 @@ namespace WindowsFormsApp1
             }
         }
 
+        public void RefreshMainForm()
+        {
+            LoadDataTable();
+            LoadDataCategory();
+            if (categories.Count > 0)
+            {
+                categoryId = categories[0].Id;
+                LoadFoodsByCategoryId(categoryId);
+            }
+        }
+
         private void frm_main_Load(object sender, EventArgs e)
         {
-            this.tableFoodTableAdapter.Fill(this.quanLyBanCafeDataSet1.TableFood);
-            this.categoryTableAdapter.Fill(this.quanLyBanCafeDataSet.Category);
-            cb_category_SelectedIndexChanged(sender, e);
+            LoadDataTable();
+            LoadDataCategory();
+            if (categories.Count > 0)
+            {
+                categoryId = categories[0].Id;
+                LoadFoodsByCategoryId(categoryId);
+            }
+        }
+
+        List<Category> categories = new List<Category>();
+        int categoryId;
+
+        private void LoadDataCategory()
+        {
+            categories.Clear();
+
+            string query = "select c.* from Category c where c.isBlock = 0";
+            DataTable data = DataProvider.Instance.ExcuteQuery(query);
+
+            foreach (DataRow row in data.Rows)
+            {
+                Category category = new Category(row);
+
+                categories.Add(category);
+            }
+
+            cb_category.DataSource = null;
+            cb_category.DataSource = categories;
+            cb_category.DisplayMember = "Name";
+            cb_category.ValueMember = "Id";
         }
 
         private void cb_category_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Kiểm tra nếu SelectedValue không null
-            if (cb_category.SelectedValue != null)
+            if (cb_category.SelectedValue != null && int.TryParse(cb_category.SelectedValue.ToString(), out int selectedCategoryId))
             {
-                int categoryId;
-                // Kiểm tra nếu SelectedValue có thể được chuyển đổi thành int
-                if (int.TryParse(cb_category.SelectedValue.ToString(), out categoryId))
-                {
-                    string query = "exec GetDataFoodByCategoryId @id";
-                    DataTable data = DataProvider.Instance.ExcuteQuery(query, new object[] { categoryId });
-
-                    List<Food> foods = new List<Food>();
-
-                    foreach (DataRow row in data.Rows)
-                    {
-                        Food food = new Food(row);
-                        foods.Add(food);
-                    }
-
-                    cb_food.DataSource = foods;
-                    cb_food.DisplayMember = "Name";
-                    cb_food.ValueMember = "Id";
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi chuyển đổi categoryId", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn danh mục hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                categoryId = selectedCategoryId;
+                LoadFoodsByCategoryId(categoryId);
             }
         }
 
+        private void LoadFoodsByCategoryId(int categoryId)
+        {
+            string query = "exec GetDataFoodByCategoryId @id";
+            DataTable data = DataProvider.Instance.ExcuteQuery(query, new object[] { categoryId });
+
+            List<Food> foods = new List<Food>();
+
+            foreach (DataRow row in data.Rows)
+            {
+                Food food = new Food(row);
+                foods.Add(food);
+            }
+
+            cb_food.DataSource = foods;
+            cb_food.DisplayMember = "Name";
+            cb_food.ValueMember = "Id";
+        }
 
         List<Table> tables = new List<Table>();
 
@@ -121,6 +149,10 @@ namespace WindowsFormsApp1
 
                 tables.Add(table);
             }
+
+            cb_changtable.DataSource = tables;
+            cb_changtable.DisplayMember = "Name";
+            cb_changtable.ValueMember = "Id";
 
             foreach (var table in tables)
             {

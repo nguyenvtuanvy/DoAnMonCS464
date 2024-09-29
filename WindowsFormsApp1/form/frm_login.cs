@@ -120,6 +120,13 @@ namespace WindowsFormsApp1
                         account.Username = row["username"].ToString();
                         account.Password = row["password"].ToString();
                         account.Role = row["role"].ToString();
+                        account.IsBlock = int.Parse(row["isBlock"].ToString());
+                    }
+
+                    if (account.IsBlock == 1)
+                    {
+                        MessageBox.Show("Tài khoản của bạn đã bị khoá, vui lòng liên hệ Admin để giải quyết");
+                        return;
                     }
 
                     bool check_login = false;
@@ -133,8 +140,10 @@ namespace WindowsFormsApp1
                     {
                         MessageBox.Show("Đăng Nhập Thành Công");
 
+                        Session.Instance.CurrentAccount = account;
+
                         CloseForm();
-                        frm_main _Main = new frm_main(account);
+                        frm_main _Main = new frm_main();
                         _Main.Show();
                         this.Hide();
                     }

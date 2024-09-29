@@ -11,6 +11,6 @@ namespace WindowsFormsApp1.form
         public static frm_main frm_Main = new frm_main();
         public static frm_info_account frm_Info_Account = new frm_info_account();
         public static frm_login frm_Login = new frm_login();
-        public static frm_admin frm_Admin = new frm_admin();
+        //public static frm_admin frm_Admin = new frm_admin();
     }
 }

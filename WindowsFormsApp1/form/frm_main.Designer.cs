@@ -73,7 +73,6 @@ namespace WindowsFormsApp1
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminToolStripMenuItem,
@@ -218,15 +217,12 @@ namespace WindowsFormsApp1
             // 
             // cb_changtable
             // 
-            this.cb_changtable.DataSource = this.tableFoodBindingSource;
-            this.cb_changtable.DisplayMember = "name";
             this.cb_changtable.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_changtable.FormattingEnabled = true;
             this.cb_changtable.Location = new System.Drawing.Point(6, 62);
             this.cb_changtable.Name = "cb_changtable";
             this.cb_changtable.Size = new System.Drawing.Size(133, 30);
             this.cb_changtable.TabIndex = 9;
-            this.cb_changtable.ValueMember = "id";
             // 
             // tableFoodBindingSource
             // 
@@ -262,15 +258,12 @@ namespace WindowsFormsApp1
             // 
             // cb_category
             // 
-            this.cb_category.DataSource = this.categoryBindingSource;
-            this.cb_category.DisplayMember = "name";
             this.cb_category.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_category.FormattingEnabled = true;
             this.cb_category.Location = new System.Drawing.Point(624, 51);
             this.cb_category.Name = "cb_category";
             this.cb_category.Size = new System.Drawing.Size(378, 30);
             this.cb_category.TabIndex = 4;
-            this.cb_category.ValueMember = "id";
             this.cb_category.SelectedIndexChanged += new System.EventHandler(this.cb_category_SelectedIndexChanged);
             // 
             // categoryBindingSource

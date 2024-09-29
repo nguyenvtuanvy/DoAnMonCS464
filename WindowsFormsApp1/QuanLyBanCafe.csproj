@@ -52,6 +52,7 @@
     <Compile Include="entity\BillItem.cs" />
     <Compile Include="entity\Category.cs" />
     <Compile Include="entity\Food.cs" />
+    <Compile Include="entity\Session.cs" />
     <Compile Include="entity\Table.cs" />
     <Compile Include="form\frm_admin.cs">
       <SubType>Form</SubType>
@@ -82,6 +83,12 @@
     </Compile>
     <Compile Include="form\frm_main.Designer.cs">
       <DependentUpon>frm_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\frm_reset_password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\frm_reset_password.Designer.cs">
+      <DependentUpon>frm_reset_password.cs</DependentUpon>
     </Compile>
     <Compile Include="form\index_form.cs" />
     <Compile Include="Program.cs" />
@@ -117,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\frm_main.resx">
       <DependentUpon>frm_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\frm_reset_password.resx">
+      <DependentUpon>frm_reset_password.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

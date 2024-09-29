@@ -79,9 +79,6 @@ namespace WindowsFormsApp1.provider
             return data;
         }
 
-
-
-
         public int ExcuteNonQuery(string query, object[] parameter = null, SqlParameter outputParam = null)
         {
             int check = 0;
