@@ -165,7 +165,7 @@ namespace WindowsFormsApp1.form
             this.Controls.Add(this.label1);
             this.Name = "frm_reset_password";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frm_reset_password";
+            this.Text = "Đặt lại mật khẩu";
             this.ResumeLayout(false);
             this.PerformLayout();
 

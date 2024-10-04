@@ -12,8 +12,7 @@ namespace WindowsFormsApp1.provider
     {
         private static DataProvider instance;
 
-
-        string connectionstr = "Data Source=ADMIN-PC;Initial Catalog=QuanLyBanCafe;Integrated Security=True";
+        string connectionstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""D:\new do an .net\DoAnCS464\WindowsFormsApp1\QLQuanCaPhe.mdf"";Integrated Security=True";
 
         internal static DataProvider Instance
         {

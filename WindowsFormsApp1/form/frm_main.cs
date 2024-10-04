@@ -142,7 +142,6 @@ namespace WindowsFormsApp1
             string query = "exec GetDataTable";
             DataTable data = DataProvider.Instance.ExcuteQuery(query);
 
-
             foreach (DataRow row in data.Rows)
             {
                 Table table = new Table(row);
@@ -151,7 +150,7 @@ namespace WindowsFormsApp1
             }
 
             cb_changtable.DataSource = tables;
-            cb_changtable.DisplayMember = "Name";
+            cb_changtable.DisplayMember = "name";
             cb_changtable.ValueMember = "Id";
 
             foreach (var table in tables)

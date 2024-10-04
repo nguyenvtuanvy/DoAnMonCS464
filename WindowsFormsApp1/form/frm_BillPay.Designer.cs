@@ -39,16 +39,16 @@ namespace WindowsFormsApp1.form
             this.lb_datecheckout = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lv_bill = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lb_totalbill = new System.Windows.Forms.Label();
             this.lb_discount = new System.Windows.Forms.Label();
             this.lb_pay = new System.Windows.Forms.Label();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -153,6 +153,26 @@ namespace WindowsFormsApp1.form
             this.lv_bill.UseCompatibleStateImageBehavior = false;
             this.lv_bill.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tên món:";
+            this.columnHeader1.Width = 182;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Giá";
+            this.columnHeader2.Width = 95;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Số lượng";
+            this.columnHeader3.Width = 89;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Thành tiền";
+            this.columnHeader4.Width = 101;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -219,26 +239,6 @@ namespace WindowsFormsApp1.form
             this.lb_pay.TabIndex = 13;
             this.lb_pay.Text = "Tổng ";
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Tên món:";
-            this.columnHeader1.Width = 182;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Giá";
-            this.columnHeader2.Width = 95;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Số lượng";
-            this.columnHeader3.Width = 89;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Thành tiền";
-            this.columnHeader4.Width = 101;
-            // 
             // panel2
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
@@ -269,7 +269,7 @@ namespace WindowsFormsApp1.form
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frm_BillPay";
-            this.Text = "frm_BillPay";
+            this.Text = "Hoá đơn";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -111,13 +111,18 @@ namespace WindowsFormsApp1.form
             else
             {
                 string query = "exec UpdatePasswordByID @AccountID, @NewPassword";
-                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { info_acc.Id, txt_newpassword.Text });
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { info_acc.Id, BCrypt.Net.BCrypt.HashString(txt_newpassword.Text) });
 
                 if (result > 0)
                 {
                     MessageBox.Show("Thay đổi mật khẩu thành công");
                     info_acc.Password = txt_newpassword.Text;
                     this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Thay đổi mật khẩu thất bại");
+                    return;
                 }
             }
         }

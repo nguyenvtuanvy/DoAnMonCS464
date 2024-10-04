@@ -71,7 +71,7 @@ namespace WindowsFormsApp1.form
 
         private void frm_admin_Load(object sender, EventArgs e)
         {
-            this.categoryTableAdapter.Fill(this.quanLyBanCafeDataSet2.Category);
+            this.categoryTableAdapter.Fill(this.qLQuanCaPheDataSet.Category);
             GetDataFood();
             GetDataCategory();
             GetDataTable();
@@ -1016,6 +1016,7 @@ namespace WindowsFormsApp1.form
                 MessageBox.Show("Vui lòng nhập mật khẩu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            string save_password = BCrypt.Net.BCrypt.HashString(password);
 
             string role = rd_roleadmin.Checked ? "ADMIN" : "USER";
             if (string.IsNullOrWhiteSpace(role))
@@ -1028,7 +1029,7 @@ namespace WindowsFormsApp1.form
 
             try
             {
-                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { fullname, username, password, role });
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { fullname, username, save_password, role });
 
                 if (result > 0)
                 {

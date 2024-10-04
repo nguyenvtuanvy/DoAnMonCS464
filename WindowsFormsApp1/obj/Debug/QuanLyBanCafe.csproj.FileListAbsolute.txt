@@ -13,3 +13,8 @@ D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.frm_main
 D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm_admin.resources
 D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm_BillPay.resources
 D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.form.frm_reset_password.resources
+D:\new do an .net\DoAnCS464\WindowsFormsApp1\bin\Debug\QLQuanCaPhe.mdf
+D:\new do an .net\DoAnCS464\WindowsFormsApp1\bin\Debug\QLQuanCaPhe_log.ldf
+D:\new do an .net\DoAnCS464\WindowsFormsApp1\bin\Debug\BCrypt.Net.dll
+D:\new do an .net\DoAnCS464\WindowsFormsApp1\bin\Debug\BCrypt.Net.xml
+D:\new do an .net\DoAnCS464\WindowsFormsApp1\obj\Debug\QuanLyBanCafe.csproj.CopyComplete

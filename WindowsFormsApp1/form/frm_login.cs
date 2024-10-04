@@ -132,14 +132,15 @@ namespace WindowsFormsApp1
                     bool check_login = false;
                     if (!string.IsNullOrEmpty(input_password))
                     {
-                        //check_login = BCrypt.Net.BCrypt.Verify(password, store_password);
-                        check_login = input_password == account.Password ? true : false;
+                        check_login = BCrypt.Net.BCrypt.Verify(input_password, account.Password);
+                        //check_login = input_password == account.Password ? true : false;
                     }
 
                     if (check_login)
                     {
                         MessageBox.Show("Đăng Nhập Thành Công");
 
+                        account.Password = input_password;
                         Session.Instance.CurrentAccount = account;
 
                         CloseForm();

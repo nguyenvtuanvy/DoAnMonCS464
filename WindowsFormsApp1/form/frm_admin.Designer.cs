@@ -43,8 +43,8 @@ namespace WindowsFormsApp1.form
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.cb_category = new System.Windows.Forms.ComboBox();
-            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.quanLyBanCafeDataSet2 = new WindowsFormsApp1.QuanLyBanCafeDataSet2();
+            this.categoryBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.qLQuanCaPheDataSet = new WindowsFormsApp1.QLQuanCaPheDataSet();
             this.nb_giafood = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -115,7 +115,8 @@ namespace WindowsFormsApp1.form
             this.label13 = new System.Windows.Forms.Label();
             this.txt_username = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.categoryTableAdapter = new WindowsFormsApp1.QuanLyBanCafeDataSet2TableAdapters.CategoryTableAdapter();
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoryTableAdapter = new WindowsFormsApp1.QLQuanCaPheDataSetTableAdapters.CategoryTableAdapter();
             this.tcAdmin.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -123,8 +124,8 @@ namespace WindowsFormsApp1.form
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qLQuanCaPheDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nb_giafood)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -147,6 +148,7 @@ namespace WindowsFormsApp1.form
             this.panel15.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tcAdmin
@@ -289,7 +291,7 @@ namespace WindowsFormsApp1.form
             // 
             // cb_category
             // 
-            this.cb_category.DataSource = this.categoryBindingSource;
+            this.cb_category.DataSource = this.categoryBindingSource1;
             this.cb_category.DisplayMember = "name";
             this.cb_category.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_category.FormattingEnabled = true;
@@ -299,15 +301,15 @@ namespace WindowsFormsApp1.form
             this.cb_category.TabIndex = 13;
             this.cb_category.ValueMember = "id";
             // 
-            // categoryBindingSource
+            // categoryBindingSource1
             // 
-            this.categoryBindingSource.DataMember = "Category";
-            this.categoryBindingSource.DataSource = this.quanLyBanCafeDataSet2;
+            this.categoryBindingSource1.DataMember = "Category";
+            this.categoryBindingSource1.DataSource = this.qLQuanCaPheDataSet;
             // 
-            // quanLyBanCafeDataSet2
+            // qLQuanCaPheDataSet
             // 
-            this.quanLyBanCafeDataSet2.DataSetName = "QuanLyBanCafeDataSet2";
-            this.quanLyBanCafeDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.qLQuanCaPheDataSet.DataSetName = "QLQuanCaPheDataSet";
+            this.qLQuanCaPheDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // nb_giafood
             // 
@@ -1070,6 +1072,10 @@ namespace WindowsFormsApp1.form
             this.label14.TabIndex = 0;
             this.label14.Text = "Tên đăng nhập:";
             // 
+            // categoryBindingSource
+            // 
+            this.categoryBindingSource.DataMember = "Category";
+            // 
             // categoryTableAdapter
             // 
             this.categoryTableAdapter.ClearBeforeFill = true;
@@ -1081,7 +1087,7 @@ namespace WindowsFormsApp1.form
             this.ClientSize = new System.Drawing.Size(1043, 669);
             this.Controls.Add(this.tcAdmin);
             this.Name = "frm_admin";
-            this.Text = "frm_admin";
+            this.Text = "Admin";
             this.Load += new System.EventHandler(this.frm_admin_Load);
             this.tcAdmin.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1092,8 +1098,8 @@ namespace WindowsFormsApp1.form
             this.tabPage2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qLQuanCaPheDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nb_giafood)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -1122,6 +1128,7 @@ namespace WindowsFormsApp1.form
             this.panel17.PerformLayout();
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1204,9 +1211,9 @@ namespace WindowsFormsApp1.form
         private System.Windows.Forms.RadioButton rd_action;
         private System.Windows.Forms.RadioButton rd_block;
         private System.Windows.Forms.Button btn_resetpass;
-        private QuanLyBanCafeDataSet2 quanLyBanCafeDataSet2;
+        //private QuanLyBanCafeDataSet2 quanLyBanCafeDataSet2;
         private System.Windows.Forms.BindingSource categoryBindingSource;
-        private QuanLyBanCafeDataSet2TableAdapters.CategoryTableAdapter categoryTableAdapter;
+        //private QuanLyBanCafeDataSet2TableAdapters.CategoryTableAdapter categoryTableAdapter;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Panel panel17;
         private System.Windows.Forms.RadioButton rd_roleuser;
@@ -1214,5 +1221,8 @@ namespace WindowsFormsApp1.form
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btn_cleartoaddempl;
+        private QLQuanCaPheDataSet qLQuanCaPheDataSet;
+        private System.Windows.Forms.BindingSource categoryBindingSource1;
+        private QLQuanCaPheDataSetTableAdapters.CategoryTableAdapter categoryTableAdapter;
     }
 }

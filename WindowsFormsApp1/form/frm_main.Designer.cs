@@ -48,26 +48,26 @@ namespace WindowsFormsApp1
             this.nb_discount = new System.Windows.Forms.NumericUpDown();
             this.cb_changtable = new System.Windows.Forms.ComboBox();
             this.tableFoodBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.quanLyBanCafeDataSet1 = new WindowsFormsApp1.QuanLyBanCafeDataSet1();
+            //this.quanLyBanCafeDataSet1 = new WindowsFormsApp1.QuanLyBanCafeDataSet1();
             this.btn_changtable = new System.Windows.Forms.Button();
             this.btn_pay = new System.Windows.Forms.Button();
             this.cb_category = new System.Windows.Forms.ComboBox();
             this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.quanLyBanCafeDataSet = new WindowsFormsApp1.QuanLyBanCafeDataSet();
+            //this.quanLyBanCafeDataSet = new WindowsFormsApp1.QuanLyBanCafeDataSet();
             this.cb_food = new System.Windows.Forms.ComboBox();
             this.btn_addfood = new System.Windows.Forms.Button();
             this.nb_foodcount = new System.Windows.Forms.NumericUpDown();
             this.flp_table = new System.Windows.Forms.FlowLayoutPanel();
-            this.categoryTableAdapter = new WindowsFormsApp1.QuanLyBanCafeDataSetTableAdapters.CategoryTableAdapter();
-            this.tableFoodTableAdapter = new WindowsFormsApp1.QuanLyBanCafeDataSet1TableAdapters.TableFoodTableAdapter();
+            //this.categoryTableAdapter = new WindowsFormsApp1.QuanLyBanCafeDataSetTableAdapters.CategoryTableAdapter();
+            //this.tableFoodTableAdapter = new WindowsFormsApp1.QuanLyBanCafeDataSet1TableAdapters.TableFoodTableAdapter();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nb_discount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableFoodBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet1)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nb_foodcount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,12 +227,12 @@ namespace WindowsFormsApp1
             // tableFoodBindingSource
             // 
             this.tableFoodBindingSource.DataMember = "TableFood";
-            this.tableFoodBindingSource.DataSource = this.quanLyBanCafeDataSet1;
+            //this.tableFoodBindingSource.DataSource = this.quanLyBanCafeDataSet1;
             // 
             // quanLyBanCafeDataSet1
             // 
-            this.quanLyBanCafeDataSet1.DataSetName = "QuanLyBanCafeDataSet1";
-            this.quanLyBanCafeDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            //this.quanLyBanCafeDataSet1.DataSetName = "QuanLyBanCafeDataSet1";
+            //this.quanLyBanCafeDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btn_changtable
             // 
@@ -269,12 +269,12 @@ namespace WindowsFormsApp1
             // categoryBindingSource
             // 
             this.categoryBindingSource.DataMember = "Category";
-            this.categoryBindingSource.DataSource = this.quanLyBanCafeDataSet;
+            //this.categoryBindingSource.DataSource = this.quanLyBanCafeDataSet;
             // 
             // quanLyBanCafeDataSet
             // 
-            this.quanLyBanCafeDataSet.DataSetName = "QuanLyBanCafeDataSet";
-            this.quanLyBanCafeDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            //this.quanLyBanCafeDataSet.DataSetName = "QuanLyBanCafeDataSet";
+            //this.quanLyBanCafeDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // cb_food
             // 
@@ -317,11 +317,11 @@ namespace WindowsFormsApp1
             // 
             // categoryTableAdapter
             // 
-            this.categoryTableAdapter.ClearBeforeFill = true;
+            //this.categoryTableAdapter.ClearBeforeFill = true;
             // 
             // tableFoodTableAdapter
             // 
-            this.tableFoodTableAdapter.ClearBeforeFill = true;
+            //this.tableFoodTableAdapter.ClearBeforeFill = true;
             // 
             // frm_main
             // 
@@ -347,9 +347,9 @@ namespace WindowsFormsApp1
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nb_discount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableFoodBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet1)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.quanLyBanCafeDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nb_foodcount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -377,17 +377,17 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_totalprice;
         private System.Windows.Forms.Label label2;
-        private QuanLyBanCafeDataSet quanLyBanCafeDataSet;
+        //private QuanLyBanCafeDataSet quanLyBanCafeDataSet;
         private System.Windows.Forms.BindingSource categoryBindingSource;
-        private QuanLyBanCafeDataSetTableAdapters.CategoryTableAdapter categoryTableAdapter;
+        //private QuanLyBanCafeDataSetTableAdapters.CategoryTableAdapter categoryTableAdapter;
         private System.Windows.Forms.ListView lv_bill;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private QuanLyBanCafeDataSet1 quanLyBanCafeDataSet1;
+        //private QuanLyBanCafeDataSet1 quanLyBanCafeDataSet1;
         private System.Windows.Forms.BindingSource tableFoodBindingSource;
-        private QuanLyBanCafeDataSet1TableAdapters.TableFoodTableAdapter tableFoodTableAdapter;
+        //private QuanLyBanCafeDataSet1TableAdapters.TableFoodTableAdapter tableFoodTableAdapter;
     }
 }
 

@@ -71,7 +71,7 @@ namespace WindowsFormsApp1.form
             else
             {
                 string query = "exec UpdatePasswordByID @AccountID, @NewPassword";
-                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { account_change.Id, txt_newpassword.Text });
+                int result = DataProvider.Instance.ExcuteNonQuery(query, new object[] { account_change.Id, BCrypt.Net.BCrypt.HashString(txt_newpassword.Text) });
 
                 if (result > 0)
                 {
